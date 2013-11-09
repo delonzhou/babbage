@@ -8,8 +8,29 @@ var app = express();
 //     console.log(sessionToken);
 // });
 
+app.configure(function() {
+  // set ejs as view rendering engine
+  app.set('view engine', 'ejs');
+  app.set('views', __dirname+'/views');
+
+  app.use(express.methodOverride());
+  app.use(express.json());
+  app.use(express.urlencoded());
+
+  // serves frontend application
+  app.use(express.static('public'));
+
+  app.use(express.logger());
+  app.use(app.router);
+
+  app.use(express.errorHandler({
+    dumpExceptions: true,
+    showStack: true
+  }));
+});
+
 app.get('/', function(req, res) {
-	res.send('test');
+	res.render('index');
 });
 
 app.listen(4000);
