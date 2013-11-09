@@ -75,7 +75,7 @@ var login = function(username, password, callback) {
 };
 
 module.exports = {
-    getTransactions: function(options, callback) {
+    getTransactions: function(callback) {
         login('sbMemadamlangsner1', 'sbMemadamlangsner1#123', function() {
             sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
                 'transactionSearchRequest.containerType': 'bank',
@@ -87,12 +87,35 @@ module.exports = {
                 'transactionSearchRequest.searchClients.clientName': 'DataSearchService',
                 'transactionSearchRequest.searchFilter.itemAcctId': '10006171',
                 'transactionSearchRequest.searchFilter.currencyCode': 'USD',
-                'transactionSearchRequest.searchFilter.postDateRange.fromDate': options.start,
-                'transactionSearchRequest.searchFilter.postDateRange.toDate': options.end,
+                'transactionSearchRequest.searchFilter.postDateRange.fromDate': '07-01-2013',
+                'transactionSearchRequest.searchFilter.postDateRange.toDate': '11-08-2013',
                 'transactionSearchRequest.searchFilter.transactionSplitType': 'ALL_TRANSACTION',
                 'transactionSearchRequest.ignoreUserInput': 'true'
+            }), function(data) {
+                var txns = [];
+                _.each(data.searchResult.transactions, function(d, i) {
+                    if (d.account.itemAccountId == 10006171) {
+                        var txn = {};
+                        txn.description = d.description.description;
+                        txn.simpleDescription = d.description.simpleDescription;
+                        txn.checkNumber = d.checkNumber;
+                        txn.postDate = d.postDate;
+                        txn.transactionPostingOrder = d.transactionPostingOrder;
+                        txn.category = d.category;
+                        txn.amount = d.amount.amount;
+                        txn.currentBalance = d.account.accountBalance.amount;
+                        txn.transactionType = d.transactionType;
+                        txn.transactionTypeId = d.transactionTypeId;
+                        txn.localizedTransactionType = d.localizedTransactionType;
+                        txn.transactionBaseType = d.transactionBaseType;
+                        txn.transactionBaseTypeId = d.transactionBaseTypeId;
+                        txn.localizedTransactionBaseType = d.localizedTransactionBaseType;
+                        txns.push(txn);
+                    }
+                });
 
-            }), callback);
+                callback(txns);
+            });
         });
     }
 };
