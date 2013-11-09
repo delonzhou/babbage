@@ -1,0 +1,8 @@
+{
+  "name": "babbage",
+  "description": "budget stuff",
+  "version": "0.0.1",
+  "dependencies": {
+    "underscore": "*"
+  }
+}

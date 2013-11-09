@@ -1,3 +1,6 @@
+var _ = require('underscore'),
+    http = require('http');
+
 http.request({
     host:'localhost',
     port:8069,
