@@ -1,6 +1,7 @@
 var yodlee = require('./yodlee');
 var express = require('express');
 var http = require('http');
+var rio = require('rio');
 var app = express();
 
 
