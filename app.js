@@ -12,4 +12,4 @@ app.get('/', function(req, res) {
 	res.send('test');
 });
 
-http.createServer(app).listen(4000);
+app.listen(4000);
