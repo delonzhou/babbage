@@ -3,7 +3,14 @@
   "description": "budget stuff",
   "version": "0.0.1",
   "dependencies": {
+    "grunt": "*",
+    "grunt-notify": "0.2.4",
+    "grunt-requirejs": "*",
+    "grunt-contrib-watch": "0.4.3",
+    "grunt-compass": "*",
+    "express": "3.4.4",
     "underscore": "*",
-    "express"	: "3.4.4"
+    "mongoose": "*",
+    "ejs": "*"
   }
 }
