@@ -31,4 +31,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-notify');
+
+  grunt.registerTask('heroku', 'clean less mincss');
 };
