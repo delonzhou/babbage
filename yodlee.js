@@ -11,6 +11,8 @@ var cobSessionToken,
 var sendRequest = function(action, req_data, callback) {
         var query_data = querystring.stringify(req_data);
 
+        console.log('getting '+action+'....');
+        console.log('with data:'+ JSON.stringify(req_data));
         var req = https.request({
             host: host,
             path: pathPrefix+action,
@@ -26,11 +28,10 @@ var sendRequest = function(action, req_data, callback) {
                 res_data += chunk;
             });
             res.on('end', function() {
+                console.log('-------------');
                 callback(JSON.parse(res_data));
             });
         });
-
-        console.log('sending '+query_data+'...');
 
         req.write(query_data);
         req.end();
@@ -77,12 +78,27 @@ module.exports = {
         });
     },
 
-    search: function(search, callback) {
+    getTransaction: function(search, callback) {
+        // sendRequest('jsonsdk/DataService/getItemSummaries', get_tokens()), function(data) {
+        //     var itemAccountID = data[1].itemAccountId;
+        //     console.log(itemAccountID);
 
-        sendRequest('jsonsdk/SiteTraversal/searchSite', _.extend(get_tokens(), {
-            siteSearchString: search
-        }), function(data) {
-            callback(data);
-        });
+            sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
+                'transactionSearchRequest.containerType': 'bank',
+                'transactionSearchRequest.higherFetchLimit': 500,
+                'transactionSearchRequest.lowerFetchLimit': 1,
+                'transactionSearchRequest.resultRange.startNumber': 1,
+                'transactionSearchRequest.resultRange.endNumber': 500,
+                'transactionSearchRequest.searchClients.clientId': 1,
+                'transactionSearchRequest.searchClients.clientName': 'DataSearchService',
+                'transactionSearchRequest.searchFilter.itemAccountId': '10006171',
+                'transactionSearchRequest.searchFilter.currencyCode': 'USD',
+                'transactionSearchRequest.searchFilter.postDateRange.fromDate': '01-01-2013',
+                'transactionSearchRequest.searchFilter.postDateRange.toDate': '11-08-2013',
+                'transactionSearchRequest.searchFilter.transactionSplitType': 'ALL_TRANSACTION',
+                'transactionSearchRequest.ignoreUserInput': 'true'
+
+            }), callback);
+        // });
     }
 };
