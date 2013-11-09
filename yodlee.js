@@ -11,8 +11,6 @@ var cobSessionToken,
 var sendRequest = function(action, req_data, callback) {
         var query_data = querystring.stringify(req_data);
 
-        console.log('getting '+action+'....');
-        console.log('with data:'+ JSON.stringify(req_data));
         var req = https.request({
             host: host,
             path: pathPrefix+action,
@@ -28,7 +26,6 @@ var sendRequest = function(action, req_data, callback) {
                 res_data += chunk;
             });
             res.on('end', function() {
-                console.log('-------------');
                 callback(JSON.parse(res_data));
             });
         });
@@ -63,26 +60,23 @@ var get_tokens = function() {
     return obj;
 }
 
-module.exports = {
-    login: function(username, password, callback) {
-        cobAuthenticate(function() {
-            var creds = _.extend(get_tokens(), {
-                login: username,
-                password: password
-            });
-
-            sendRequest('authenticate/login', creds, function(loginData) {
-                userSessionToken = loginData.userContext.conversationCredentials.sessionToken;
-                callback();
-            });
+var login = function(username, password, callback) {
+    cobAuthenticate(function() {
+        var creds = _.extend(get_tokens(), {
+            login: username,
+            password: password
         });
-    },
 
-    getTransaction: function(search, callback) {
-        // sendRequest('jsonsdk/DataService/getItemSummaries', get_tokens()), function(data) {
-        //     var itemAccountID = data[1].itemAccountId;
-        //     console.log(itemAccountID);
+        sendRequest('authenticate/login', creds, function(loginData) {
+            userSessionToken = loginData.userContext.conversationCredentials.sessionToken;
+            callback();
+        });
+    });
+};
 
+module.exports = {
+    getTransactions: function(options, callback) {
+        login('sbMemadamlangsner1', 'sbMemadamlangsner1#123', function() {
             sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
                 'transactionSearchRequest.containerType': 'bank',
                 'transactionSearchRequest.higherFetchLimit': 500,
@@ -91,14 +85,14 @@ module.exports = {
                 'transactionSearchRequest.resultRange.endNumber': 500,
                 'transactionSearchRequest.searchClients.clientId': 1,
                 'transactionSearchRequest.searchClients.clientName': 'DataSearchService',
-                'transactionSearchRequest.searchFilter.itemAccountId': '10006171',
+                'transactionSearchRequest.searchFilter.itemAcctId': '10006171',
                 'transactionSearchRequest.searchFilter.currencyCode': 'USD',
-                'transactionSearchRequest.searchFilter.postDateRange.fromDate': '01-01-2013',
-                'transactionSearchRequest.searchFilter.postDateRange.toDate': '11-08-2013',
+                'transactionSearchRequest.searchFilter.postDateRange.fromDate': options.start,
+                'transactionSearchRequest.searchFilter.postDateRange.toDate': options.end,
                 'transactionSearchRequest.searchFilter.transactionSplitType': 'ALL_TRANSACTION',
                 'transactionSearchRequest.ignoreUserInput': 'true'
 
             }), callback);
-        // });
+        });
     }
 };
