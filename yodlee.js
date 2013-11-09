@@ -3,7 +3,10 @@ var _ = require('underscore'),
     querystring = require('querystring');
 
 var host = 'rest.developer.yodlee.com',
-    pathPrefix = '/services/srest/restserver/v1.0/authenticate/';
+    pathPrefix = '/services/srest/restserver/v1.0/';
+
+var cobSessionToken,
+    userSessionToken;
 
 var sendRequest = function(action, req_data, callback) {
         var query_data = querystring.stringify(req_data);
@@ -27,6 +30,8 @@ var sendRequest = function(action, req_data, callback) {
             });
         });
 
+        console.log('sending '+query_data+'...');
+
         req.write(query_data);
         req.end();
 };
@@ -37,21 +42,47 @@ var cobAuthenticate = function(callback) {
         cobrandPassword: '77da9de9-6a84-46c1-9d92-51f19da6e37c'
     };
 
-    sendRequest('coblogin', data, function(res) {
-        callback(res.cobrandConversationCredentials.sessionToken);
+    sendRequest('authenticate/coblogin', data, function(res) {
+        cobSessionToken = res.cobrandConversationCredentials.sessionToken;
+        callback();
     });
 };
 
+var get_tokens = function() {
+    var obj = {};
+
+    if (cobSessionToken) {
+        obj.cobSessionToken = cobSessionToken;
+    }
+
+    if (userSessionToken) {
+        obj.userSessionToken = userSessionToken;
+    }
+
+    return obj;
+}
+
 module.exports = {
     login: function(username, password, callback) {
-        cobAuthenticate(function(sessionToken) {
-            var creds = {
-                coSessionToken: sessionToken,
+        cobAuthenticate(function() {
+            var creds = _.extend(get_tokens(), {
                 login: username,
                 password: password
-            };
+            });
 
-            sendRequest('login', creds, callback);
+            sendRequest('authenticate/login', creds, function(loginData) {
+                userSessionToken = loginData.userContext.conversationCredentials.sessionToken;
+                callback();
+            });
+        });
+    },
+
+    search: function(search, callback) {
+
+        sendRequest('jsonsdk/SiteTraversal/searchSite', _.extend(get_tokens(), {
+            siteSearchString: search
+        }), function(data) {
+            callback(data);
         });
     }
 };
