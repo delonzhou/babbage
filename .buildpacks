@@ -1,2 +1,2 @@
-http://github.com/virtualstaticvoid/heroku-buildpack-r.git#master
+https://github.com/virtualstaticvoid/heroku-buildpack-r.git
 https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass.git
