@@ -11,6 +11,16 @@
 		<section id="graphArea"></section>
 	</section>
 
-	<script data-main="assets/scripts/main" src="assets/scripts/libs/require.js"></script>
+  <script src="https://www.google.com/jsapi"></script>
+  <script>
+    google.load('visualization', '1.0', {'packages':['corechart']});
+
+    google.setOnLoadCallback(function() {
+      var el = document.createElement('script');
+      el.src = "assets/scripts/libs/require.js";
+      el.setAttribute('data-main', "assets/scripts/main");
+      document.getElementsByTagName('body')[0].appendChild(el);
+    });
+  </script>
 </body>
 </html>

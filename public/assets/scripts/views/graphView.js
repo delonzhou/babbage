@@ -25,6 +25,7 @@ function ($, _, Marionette, Graph, Transaction) {
 		onShow: function() {
 			this.graph = new Graph({
 				now: this.model.get('start'),
+				'$el': this.$el,
 				width: this.$el.width(),
 				height: this.$el.height(),
 				x_margin: X_MARGIN,
