@@ -4,6 +4,6 @@
   "version": "0.0.1",
   "dependencies": {
     "underscore": "*",
-    "express"	: "3.4.*"
+    "express"	: "3.4.4"
   }
 }
