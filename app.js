@@ -56,7 +56,7 @@ app.get('/test', function(req, response) {
 });
 
 app.post('/api/login', function(req, res) {
-    yodlee.login(req.body.username, req.body.password, function(data) {
+    yodlee.login('sbMemadamlangsner1', 'sbMemadamlangsner1#123', function(data) {
         yodlee.getBankAccounts(function(data) {
             send_json(res, data);
         });
