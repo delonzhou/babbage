@@ -9,13 +9,9 @@ var args = {
 
 function displayResponse(err, res) {
     var i;
-
     if (!err) {
         res = JSON.parse(res);
-        for (i = 0; i < args.prods.length; i += 1) {
-            util.puts("Optimal weight for " + args.prods[i] +
-                " is " + res.pw[i]);
-        }
+        util.puts("hello");
         // Optimal weights: 0.27107,0.2688,0.46013
     } else {
         util.puts("Optimization failed");

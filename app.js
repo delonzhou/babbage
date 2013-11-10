@@ -34,6 +34,26 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
+app.get('/test', function(req, response) {
+	var args = {
+	    prods: ["IBM", "YHOO", "MSFT"]
+	};
+	rio.sourceAndEval(__dirname + "/ex2.R", {
+	    entryPoint: "getOptimalPortfolio",
+	    data: args,
+	    callback: function displayResponse(err, res) {
+		    var i;
+		    if (!err) {
+		        res = JSON.parse(res);
+		        response.send("hello");
+		        // Optimal weights: 0.27107,0.2688,0.46013
+		    } else {
+		        response.send("Optimization failed");
+		    }
+		}
+	});
+});
+
 var port = process.env.PORT || 5000;
 app.listen(port);
 console.log("Listening on port " + port);
