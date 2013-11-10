@@ -95,46 +95,44 @@ yodlee = {
     },
 
     getTransactions: function(itemAccountId, callback) {
-        yodlee.login('sbMemadamlangsner1', 'sbMemadamlangsner1#123', function() {
-            sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
-                'transactionSearchRequest.containerType': 'bank',
-                'transactionSearchRequest.higherFetchLimit': 500,
-                'transactionSearchRequest.lowerFetchLimit': 1,
-                'transactionSearchRequest.resultRange.startNumber': 1,
-                'transactionSearchRequest.resultRange.endNumber': 500,
-                'transactionSearchRequest.searchClients.clientId': 1,
-                'transactionSearchRequest.searchClients.clientName': 'DataSearchService',
-                'transactionSearchRequest.searchFilter.itemAcctId': itemAccountId,
-                'transactionSearchRequest.searchFilter.currencyCode': 'USD',
-                'transactionSearchRequest.searchFilter.postDateRange.fromDate': '07-01-2013',
-                'transactionSearchRequest.searchFilter.postDateRange.toDate': '11-08-2013',
-                'transactionSearchRequest.searchFilter.transactionSplitType': 'ALL_TRANSACTION',
-                'transactionSearchRequest.ignoreUserInput': 'true'
-            }), function(data) {
-                var txns = [];
-                _.each(data.searchResult.transactions, function(d, i) {
-                    if (d.account.itemAccountId == 10006171) { // hack
-                        var txn = {};
-                        txn.description = d.description.description;
-                        txn.simpleDescription = d.description.simpleDescription;
-                        txn.checkNumber = d.checkNumber;
-                        txn.postDate = d.postDate;
-                        txn.transactionPostingOrder = d.transactionPostingOrder;
-                        txn.category = d.category;
-                        txn.amount = d.amount.amount;
-                        txn.currentBalance = d.account.accountBalance.amount;
-                        txn.transactionType = d.transactionType;
-                        txn.transactionTypeId = d.transactionTypeId;
-                        txn.localizedTransactionType = d.localizedTransactionType;
-                        txn.transactionBaseType = d.transactionBaseType;
-                        txn.transactionBaseTypeId = d.transactionBaseTypeId;
-                        txn.localizedTransactionBaseType = d.localizedTransactionBaseType;
-                        txns.push(txn);
-                    }
-                });
-
-                callback(txns);
+        sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
+            'transactionSearchRequest.containerType': 'bank',
+            'transactionSearchRequest.higherFetchLimit': 500,
+            'transactionSearchRequest.lowerFetchLimit': 1,
+            'transactionSearchRequest.resultRange.startNumber': 1,
+            'transactionSearchRequest.resultRange.endNumber': 500,
+            'transactionSearchRequest.searchClients.clientId': 1,
+            'transactionSearchRequest.searchClients.clientName': 'DataSearchService',
+            'transactionSearchRequest.searchFilter.itemAcctId': itemAccountId,
+            'transactionSearchRequest.searchFilter.currencyCode': 'USD',
+            'transactionSearchRequest.searchFilter.postDateRange.fromDate': '07-01-2013',
+            'transactionSearchRequest.searchFilter.postDateRange.toDate': '11-08-2013',
+            'transactionSearchRequest.searchFilter.transactionSplitType': 'ALL_TRANSACTION',
+            'transactionSearchRequest.ignoreUserInput': 'true'
+        }), function(data) {
+            var txns = [];
+            _.each(data.searchResult.transactions, function(d, i) {
+                if (d.account.itemAccountId == itemAccountId) {
+                    var txn = {};
+                    txn.description = d.description.description;
+                    txn.simpleDescription = d.description.simpleDescription;
+                    txn.checkNumber = d.checkNumber;
+                    txn.postDate = d.postDate;
+                    txn.transactionPostingOrder = d.transactionPostingOrder;
+                    txn.category = d.category;
+                    txn.amount = d.amount.amount;
+                    txn.currentBalance = d.account.accountBalance.amount;
+                    txn.transactionType = d.transactionType;
+                    txn.transactionTypeId = d.transactionTypeId;
+                    txn.localizedTransactionType = d.localizedTransactionType;
+                    txn.transactionBaseType = d.transactionBaseType;
+                    txn.transactionBaseTypeId = d.transactionBaseTypeId;
+                    txn.localizedTransactionBaseType = d.localizedTransactionBaseType;
+                    txns.push(txn);
+                }
             });
+
+            callback(txns);
         });
     }
 };
