@@ -1,7 +1,30 @@
 .login-view {
     position: relative;
-    width: 300px;
+    width: 500px;
     margin: 0 auto;
+    text-align: center;
+
+    fieldset {
+        @include clearfix();
+        margin: 8px 0;
+        padding: 0 15px;
+
+        label {
+            width: 145px;
+            line-height: 30px;
+            text-align: right;
+            float: left;
+        }
+
+        input {
+            width: 300px;
+            float: right;
+        }
+
+        button {
+            float: right;
+        }
+    }
 
     .spinner {
         position: absolute;

@@ -1,0 +1,11 @@
+header#headerArea {
+    color: white;
+    width: $app-width;
+    margin: 20px auto 0;
+    height: 120px;
+
+    .header-top {
+        padding: 0 3px;
+        border-bottom: 1px solid $color-hr;
+    }
+}

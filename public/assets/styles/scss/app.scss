@@ -15,24 +15,23 @@
 @import "_sideBar";
 @import "_graphArea";
 
+@import "_header";
 @import "_login";
 
 body {
-	@include image('repeating/maze_white');
-	background-repeat: repeat;
+    margin: 0;
+    background: #3e0941;
 	min-width: $app-width;
 	font-family: helvetica, arial, sans-serif;
 
 	#mainContent {
 		overflow-y: hidden;
 		@include clearfix;
-		width: $app-width;
+		width: 100%;
 		height: $app-height;
-		margin: 35px auto 0;
+		margin: 0 auto;
 
 		@include cross_browser_linear_gradient(#fff, #f0f0f0);
-		@include border-radius(3px);
-		border: 1px solid $color-border;
 	}
 }
 

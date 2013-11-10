@@ -6,21 +6,18 @@
 </head>
 <body>
 
+  <header id="headerArea"></header>
+
 	<section id="mainContent">
-    <section id="sideBar"></section>
+    <section id="loginArea"></section>
     <section id="graphArea"></section>
 	</section>
 
-  <script src="https://www.google.com/jsapi"></script>
   <script>
-    google.load('visualization', '1.0', {'packages':['corechart']});
-
-    google.setOnLoadCallback(function() {
       var el = document.createElement('script');
       el.src = "assets/scripts/libs/require.js";
       el.setAttribute('data-main', "assets/scripts/main");
       document.getElementsByTagName('body')[0].appendChild(el);
-    });
   </script>
 </body>
 </html>

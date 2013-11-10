@@ -6,11 +6,11 @@ define(
 "marionette",
 "views/loginView",
 "views/graphView",
-"views/sideBar/sideBarView",
+"views/headerView",
 "models/budget"
 ],
 
-function ($, _, Backbone, Marionette, LoginView, GraphView, SideBarView, Budget) {
+function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) {
 
     App = new Marionette.Application();
 
@@ -23,29 +23,26 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, SideBarView, Budget)
     // global events
     App.addInitializer(function(options) {
         App.vent.on('login', function(data) {
-            var now = moment().startOf('day');
-            App.budget = new Budget({
-                data: data,
-                start: now,
-                end: now.clone().add('months', 12)
-            });
+            App.budget = new Budget({ data: data });
 
+            this.loginArea.close();
+            this.headerArea.show(new HeaderView());
             this.graphArea.show(new GraphView({ model: App.budget }));
-            this.sideBar.show(new SideBarView({ model: App.budget }));
         }, this);
     });
 
     App.addInitializer(function(options) {
         // create application level regions for sidebar and graph
         App.addRegions({
+            headerArea: "header#headerArea",
             graphArea: "section#graphArea",
-            sideBar: "section#sideBar"
+            loginArea: "section#loginArea"
         });
     });
 
     // gets triggered when app starts
     App.on("start", function() {
-        this.graphArea.show(new LoginView());
+        this.loginArea.show(new LoginView());
     });
 
     return App;
