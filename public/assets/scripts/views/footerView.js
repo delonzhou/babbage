@@ -19,18 +19,25 @@ function($, _, Backbone, Marionette, TransactionTableView) {
             this.recurringArea.show(new TransactionTableView({
                 model: new Backbone.Model({ title: 'Recurring Transactions' }),
                 collection: new Backbone.Collection([{
-                    amount: -1200,
-                    name: 'Rent'
+                    amount: -1400,
+                    name: 'TRANSFER ADAM S LANGSNER:Yvonne Whitley.....'
                 }, {
-                    amount: 1935,
-                    name: 'Salary'
+                    amount: 3170,
+                    name: 'BETTERMENT DES:TRANSFER ID:xxx0455 INDN.....',
+                    freq: 'twice a month'
+                }, {
+                    amount: -762,
+                    name: 'BETTERMENT HOLDI DES:QUICKBOOKS ID:xxxx.....'
+                }, {
+                    amount: -734,
+                    name: 'AMERICAN EXPRESS DES:AM PMT ID:x0946 IN.....'
                 }])
             }));
 
             this.nonRecurringArea.show(new TransactionTableView({
                 model: new Backbone.Model({ title: 'Everything Else' }),
                 collection: new Backbone.Collection([{
-                    amount: -895,
+                    amount: -494,
                     name: 'Spent'
                 }])
             }));

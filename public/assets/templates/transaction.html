@@ -1,4 +1,4 @@
 <span class="left sign <%= sign_class() %>"><%= sign() %></span>
 <span class="left amount"><%= amount() %></span>
 <span class="left name"><%= self.model.get('name') %></span>
-<span class="right frequency">every month</span>
+<span class="right frequency"><%= self.model.get('freq') || 'every month' %></span>
