@@ -246,5 +246,48 @@ function($, F) {
             .style('display', 'none');
     }
 
+  // ----------------------------------
+
+  function GoogleGraph(options) {
+    this.$el = options.$el;
+    this.data = reformatData(options.data);
+    this.options = options;
+
+    this.draw = function() {
+      var data = google.visualization.arrayToDataTable(this.data);
+
+      var opts = {
+        chartArea: {
+          height: '80%',
+          width: '80%'
+        },
+        legend: { position: 'none' },
+        isStacked: true
+      };
+
+      var chart = new google.visualization.ColumnChart(this.$el[0]);
+      chart.draw(data, opts);
+    }
+
+    this.update = function(data) {
+      this.data = reformatData(data);
+      this.draw();
+    }
+
+    function reformatData(data) {
+      var out = [
+        ['Date', 'Balance']
+      ];
+
+      for (var i = 0; i < data.length && out.length <= 12; i++) {
+        out.push([data[i].date.format('YYYY-MM-DD'), data[i].balance]);
+      }
+
+      return out;
+    }
+
+    this.draw();
+  }
+
 	return Graph;
 });

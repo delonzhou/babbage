@@ -11,8 +11,8 @@
     "underscore": "*",
     "express"	: "3.4.4",
     "mongoose": "*",
-    "ejs": "*",
-    "rio": "*"
+    "rio": "*",
+    "ejs": "*"
   },
   "engines": {
   	"node": "0.10.x",

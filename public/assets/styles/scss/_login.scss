@@ -1,0 +1,16 @@
+.login-view {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+
+    .spinner {
+        position: absolute;
+        width: 256px;
+        height: 256px;
+        left: 50%;
+        top: 50%;
+        margin-left: -128px;
+        margin-top: -128px;
+        display: none;
+    }
+}
