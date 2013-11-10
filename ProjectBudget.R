@@ -1,14 +1,12 @@
+
 library(ULF)
 #'  Function to project balance
-input <-  "~/Documents/babbage/data/data.json"
+#input <-  "~/Documents/babbage/data/data.json"
  #stmt<- fromJSON(input, asText=FALSE)
 
-returnResults<- function(input ,file=FALSE) {
-if (file)  {
+returnResults<- function(input) {
   stmt<- fromJSON(input) 
- } else {
-  stmt <-  fromJSON(input)
-}
+
 #stmt <-  fromJSON(file=input)
 ob1<- as.data.frame(t(as.matrix(unlist(stmt[1]))), stringsAsFactors=FALSE)
 ob2<- as.data.frame(t(as.matrix(unlist(stmt[2]))), stringsAsFactors=FALSE)
@@ -64,13 +62,14 @@ output$projectedCashFlows<- predict(lm1, newdata=output)
 #plot(projectedCashFlows ~ mday, data=output)
 
 output$projectedBalances<- cumsum(c(currentBalance[1], output$projectedCashFlows))[-1]
-  
-output$date <- rep(sort(as.numeric(as.character(levels(netCashFlows$mday)))),12) +
+
+output$date <-   rep(sort(as.numeric(as.character(levels(netCashFlows$mday)))),12) +
   rep(seq(0,11*30,30),each=nlevels(netCashFlows$mday))
+  
 #plot(projectedBalances~date,data=output,type="h", las=1,col="dark green")
 
   return(toJSON(subset(output,select=c(date,projectedCashFlows, projectedBalances))))
 }
  
-returnResults(input) 
+
 
