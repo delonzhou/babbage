@@ -13,8 +13,8 @@ function(_, moment, Backbone) {
         _init_data: function() {
             var now = moment().startOf('day');
             var dates = this.get('data').date;
-            var cashFlows = this.get('data').predictedCashFlows;
-            var balances = this.get('data').predictedBalances;
+            var cashFlows = this.get('data').projectedCashFlows;
+            var balances = this.get('data').projectedBalances;
 
             this.set({
                 start: now.clone().add('days', _.first(dates)),
