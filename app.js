@@ -64,14 +64,14 @@ app.post('/api/login', function(req, res) {
     };
     send_json(res, dummy);
 
-    rio.sourceAndEval(__dirname+'/ProjectBudget.R', {
-        entryPoint: 'getProjection',
-        data: txns,
-        callback: function(err, response) {
-            console.log(response);
-            send_json(res, JSON.parse(response));
-        }
-    });
+    // rio.sourceAndEval(__dirname+'/ProjectBudget.R', {
+    //     entryPoint: 'getProjection',
+    //     data: txns,
+    //     callback: function(err, response) {
+    //         console.log(response);
+    //         send_json(res, JSON.parse(response));
+    //     }
+    // });
   });
 });
 
