@@ -7,10 +7,11 @@ define(
 "views/loginView",
 "views/graphView",
 "views/headerView",
+"views/footerView",
 "models/budget"
 ],
 
-function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) {
+function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterView, Budget) {
 
     App = new Marionette.Application();
 
@@ -31,8 +32,10 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) 
             App.budget = new Budget({ data: data });
 
             this.loginArea.close();
+
             this.headerArea.show(new HeaderView({ model: App.budget }));
             this.graphArea.show(new GraphView({ model: App.budget }));
+            this.footerArea.show(new FooterView({ model: App.budget }));
         }, this);
     });
 
@@ -41,7 +44,8 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) 
         App.addRegions({
             headerArea: "header#headerArea",
             graphArea: "section#graphArea",
-            loginArea: "section#loginArea"
+            loginArea: "section#loginArea",
+            footerArea: "footer#footerArea"
         });
     });
 

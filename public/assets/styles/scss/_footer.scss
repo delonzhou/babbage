@@ -1,0 +1,46 @@
+#footerArea {
+    margin: 30px auto;
+    width: $app-width;
+    color: white;
+
+    h1 {
+        font-weight: normal;
+        font-size: 22px;
+        border-bottom: 1px solid $color-hr;
+    }
+
+    .transaction-table-view {
+        margin-bottom: 40px;
+
+        .transaction-view {
+            height: 40px;
+            border-bottom: 1px solid $color-hr;
+            margin-bottom: 10px;
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: 200;
+
+            .sign {
+                &.green { color: #3FB34F; }
+                &.red { color: #EA212D; }
+
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                width: 30px;
+            }
+
+            .amount {
+                width: 200px;
+            }
+
+            .name {
+
+            }
+
+            .frequency {
+                font-size: 16px;
+            }
+        }
+    }
+}
