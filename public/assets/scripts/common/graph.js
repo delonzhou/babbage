@@ -30,7 +30,7 @@ function($, F) {
 			this._updateScalesDomain();
 
 			this.line = d3.svg.line()
-				.interpolate("basis")
+				.interpolate("step-after")
 	    		.x(function(d,i) { return self.x(i); })
 	    		.y(function(d,i) { return self.y(d.balance); });
 		},
