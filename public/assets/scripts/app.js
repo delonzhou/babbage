@@ -43,7 +43,7 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterVi
 
             this.headerArea.show(new HeaderView({ model: App.budget }));
             this.graphArea.show(new GraphView({ model: App.budget }));
-            this.footerArea.show(new FooterView({ model: App.budget }));
+            // this.footerArea.show(new FooterView({ model: App.budget }));
         }, this);
     });
 

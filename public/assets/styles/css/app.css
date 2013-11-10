@@ -7462,6 +7462,7 @@ header#headerArea {
   box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.3);
   position: relative;
   z-index: 100;
+  height: 167px;
 }
 header#headerArea > div {
   width: 900px;
