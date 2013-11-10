@@ -44,6 +44,14 @@ function(_, moment, Backbone) {
 
         getData: function() {
             return this._data;
+        },
+
+        getCurrentBalance: function() {
+            return _.first(this._data).balance;
+        },
+
+        getNextYearBalance: function() {
+            return _.last(this._data).balance;
         }
      });
 })

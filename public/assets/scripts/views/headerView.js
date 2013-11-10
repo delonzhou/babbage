@@ -2,20 +2,18 @@ define(
 [
 "jquery",
 "underscore",
-"marionette"
+"marionette",
+"common/formatter"
 ],
-function($, _, Marionette) {
+function($, _, Marionette, Formatter) {
     return Marionette.Layout.extend({
         template: 'header',
 
-        templateHelpers: {
-            currentBalance: function() {
-                return '$TODO';
-            },
-
-            nextYearBalance: function() {
-                return '$TODO';
-            }
+        initialize: function() {
+            this.templateHelpers = {
+                self: this,
+                money: Formatter.money
+            };
         }
     });
 });

@@ -6,10 +6,10 @@
 <div class="clearfix header-bottom">
     <span class="left">
         Current Balance:
-        <%= currentBalance() %>
+        <%= money(self.model.getCurrentBalance()) %>
     </span>
     <span class="right">
         Balance in 1 year:
-        <%= nextYearBalance() %>
+        <%= money(self.model.getNextYearBalance()) %>
     </span>
 </div>
