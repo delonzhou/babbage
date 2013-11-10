@@ -7467,6 +7467,12 @@ header#headerArea .header-top {
   padding: 5px 0 10px;
   border-bottom: 1px solid #796779;
 }
+header#headerArea .header-top .logout {
+  cursor: pointer;
+}
+header#headerArea .header-top .logout:hover {
+  color: #796779;
+}
 header#headerArea .header-bottom {
   margin-top: 20px;
 }
@@ -7518,8 +7524,8 @@ header#headerArea .amount {
 }
 #accountsArea .accounts-contents .account-view {
   height: 50px;
+  line-height: 50px;
   border-bottom: 1px solid #796779;
-  line-height: 30px;
   font-size: 18px;
   font-weight: 200;
 }
@@ -7530,7 +7536,7 @@ header#headerArea .amount {
   width: 300px;
 }
 #accountsArea .accounts-contents .account-view .type {
-  width: 150px;
+  width: 100px;
   text-align: left;
 }
 #accountsArea .accounts-contents .account-view:hover {

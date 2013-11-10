@@ -8,6 +8,13 @@ header#headerArea {
     .header-top {
         padding: 5px 0 10px;
         border-bottom: 1px solid $color-hr;
+
+        .logout {
+            cursor: pointer;
+            &:hover {
+                color: $color-hr;
+            }
+        }
     }
 
     .header-bottom {
