@@ -57,3 +57,21 @@ app.get('/test', function(req, response) {
 var port = process.env.PORT || 5000;
 app.listen(port);
 console.log("Listening on port " + port);
+
+var childProcess = require('child_process'),
+rserve;
+
+rserve = childProcess.exec('R CMD Rserve --save', function (error, stdout, stderr) {
+if (error) {
+console.log(error.stack);
+console.log('Error code: '+error.code);
+console.log('Signal received: '+error.signal);
+}
+console.log('Child Process STDOUT: '+stdout);
+console.log('Child Process STDERR: '+stderr);
+});
+
+rserve.on('exit', function (code) {
+console.log('Child process exited with exit code '+code);
+require('rio').evaluate("pi / 2 * 2");
+});
