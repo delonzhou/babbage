@@ -1,2 +1,15 @@
-<span class="left">Babbage</span>
-<span class="right">Hi, Adam!</span>
+<div class="header-top clearfix">
+    <span class="left">Babbage</span>
+    <span class="right">Hi, Adam!</span>
+</div>
+
+<div class="clearfix header-bottom">
+    <span class="left">
+        Current Balance:
+        <%= currentBalance() %>
+    </span>
+    <span class="right">
+        Balance in 1 year:
+        <%= nextYearBalance() %>
+    </span>
+</div>

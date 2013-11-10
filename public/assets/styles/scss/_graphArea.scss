@@ -1,9 +1,9 @@
 #graphArea {
-	float: left;
+	width: 100%;
 	height: 100%;
 
 	& > .graph {
-		width: $graph-width;
+		width: 100%;
 		height: 100%;
 	}
 

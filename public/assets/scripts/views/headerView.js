@@ -7,6 +7,15 @@ define(
 function($, _, Marionette) {
     return Marionette.Layout.extend({
         template: 'header',
-        className: 'clearfix header-top'
+
+        templateHelpers: {
+            currentBalance: function() {
+                return '$TODO';
+            },
+
+            nextYearBalance: function() {
+                return '$TODO';
+            }
+        }
     });
 });

@@ -1,11 +1,16 @@
 header#headerArea {
+    font-size: 16px;
     color: white;
     width: $app-width;
     margin: 20px auto 0;
     height: 120px;
 
     .header-top {
-        padding: 0 3px;
+        padding: 5px 0 10px;
         border-bottom: 1px solid $color-hr;
+    }
+
+    .header-bottom {
+        margin-top: 20px;
     }
 }

@@ -26,7 +26,7 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) 
             App.budget = new Budget({ data: data });
 
             this.loginArea.close();
-            this.headerArea.show(new HeaderView());
+            this.headerArea.show(new HeaderView({ model: App.budget }));
             this.graphArea.show(new GraphView({ model: App.budget }));
         }, this);
     });
