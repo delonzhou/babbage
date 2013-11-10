@@ -16,7 +16,12 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, Budget) 
 
     App.addInitializer(function(options) {
         _.extend(App, {
-            // add methods to App object here
+            block: function() {
+                $('#blocker').show();
+            },
+            unblock: function() {
+                $('#blocker').hide();
+            }
         });
     });
 

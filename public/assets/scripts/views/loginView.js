@@ -16,12 +16,13 @@ function($, _, Marionette) {
         doLogin: function(e) {
             e.preventDefault();
 
+            App.block();
             this.$('.spinner').show();
             $.ajax({
                 url: '/api/login',
                 method: 'POST'
             }).done(function(data) {
-                this.$('.spinner').hide();
+                App.unblock();
                 App.vent.trigger('login', data);
             }.bind(this));
         }

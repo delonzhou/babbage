@@ -30,13 +30,28 @@ body {
 		width: 100%;
 		height: $app-height;
 		margin: 0 auto;
-
-		@include cross_browser_linear_gradient(#fff, #f0f0f0);
+        background: white;
 	}
 }
 
-hr {
-    margin: 15px 0;
+#blocker {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(#000000, 0.7);
+    .spinner {
+        opacity: 0.3;
+        position: absolute;
+        width: 512px;
+        height: 512px;
+        left: 50%;
+        top: 50%;
+        margin-left: -256px;
+        margin-top: -256px;
+    }
 }
 
 h2 {

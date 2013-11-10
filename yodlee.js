@@ -75,7 +75,7 @@ var login = function(username, password, callback) {
 };
 
 module.exports = {
-    getTransactions: function(callback) {
+    getData: function(callback) {
         login('sbMemadamlangsner1', 'sbMemadamlangsner1#123', function() {
             sendRequest('jsonsdk/TransactionSearchService/executeUserSearchRequest', _.extend(get_tokens(), {
                 'transactionSearchRequest.containerType': 'bank',
