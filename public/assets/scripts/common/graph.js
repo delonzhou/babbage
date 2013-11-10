@@ -41,8 +41,8 @@ function($, F) {
 			this.xAxis = d3.svg.axis()
 							.scale(this.x)
 							.orient('bottom')
-							.ticks(20)
-							.tickFormat(function(x) { return self.now.clone().add('days', x).format('M/D'); });
+							.ticks(12)
+							.tickFormat(function(x) { return self.now.clone().add('days', x).format('M/YY'); });
 
 			this.yAxis = d3.svg.axis()
 							.scale(this.y)
@@ -219,7 +219,7 @@ function($, F) {
                 .attr('style', 'display: inline;')
                 .attr('x', mouseX+graph.x_margin + (pastHalf ? -220 : 5))
                 .attr('y', 60)
-                .text(balText + '  ('+diffText+' on '+dateText+')');
+                .text(balText + ' ('+diffText+' on '+dateText+')');
 
 	        // update position of vertical line
 	        d3.transition(graph.vertical)
