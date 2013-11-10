@@ -17,10 +17,10 @@ function($, _, Marionette) {
             e.preventDefault();
 
             App.block();
-            this.$('.spinner').show();
             $.ajax({
                 url: '/api/login',
-                method: 'POST'
+                method: 'POST',
+                data: this.$('form').serialize()
             }).done(function(data) {
                 App.unblock();
                 App.vent.trigger('login', data);

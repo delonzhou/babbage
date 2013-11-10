@@ -8,10 +8,11 @@ define(
 "views/graphView",
 "views/headerView",
 "views/footerView",
+"views/accountsView",
 "models/budget"
 ],
 
-function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterView, Budget) {
+function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterView, AccountsView, Budget) {
 
     App = new Marionette.Application();
 
@@ -29,9 +30,16 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterVi
     // global events
     App.addInitializer(function(options) {
         App.vent.on('login', function(data) {
-            App.budget = new Budget({ data: data });
-
             this.loginArea.close();
+            this.accountsArea.show(new AccountsView({
+                collection: new Backbone.Collection(data)
+            }));
+        }, this);
+
+        App.vent.on('transactions', function(data) {
+            this.accountsArea.close();
+
+            App.budget = new Budget({ data: data });
 
             this.headerArea.show(new HeaderView({ model: App.budget }));
             this.graphArea.show(new GraphView({ model: App.budget }));
@@ -45,6 +53,7 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, HeaderView, FooterVi
             headerArea: "header#headerArea",
             graphArea: "section#graphArea",
             loginArea: "section#loginArea",
+            accountsArea: "section#accountsArea",
             footerArea: "footer#footerArea"
         });
     });

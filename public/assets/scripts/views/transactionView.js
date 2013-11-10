@@ -3,10 +3,9 @@ define(
 "jquery",
 "underscore",
 "marionette",
-"views/transactionView",
 "common/formatter"
 ],
-function($, _, Marionette, TransactionView, Formatter) {
+function($, _, Marionette, Formatter) {
     return Marionette.ItemView.extend({
         template: 'transaction',
         className: 'clearfix transaction-view',

@@ -1,0 +1,44 @@
+#accountsArea {
+    width: $app-width;
+    margin: 0 auto;
+
+    h1 {
+        border-bottom: 1px solid $color-text;
+        margin: 10px 0 0;
+        padding-bottom: 10px;
+    }
+
+    .accounts-contents {
+        .account-view {
+            height: 50px;
+            border-bottom: 1px solid $color-hr;
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: 200;
+
+            .bank {
+                width: 400px;
+            }
+
+            .name {
+                width: 300px;
+            }
+
+            .type {
+                width: 150px;
+                text-align: left;
+            }
+
+            &:hover {
+                background: $color-hr;
+                color: white;
+                cursor: pointer;
+            }
+
+            &:active {
+                background: #a3c6d8;
+                color: $color-text;
+            }
+        }
+    }
+}
