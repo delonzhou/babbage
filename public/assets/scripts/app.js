@@ -4,12 +4,13 @@ define(
 "underscore",
 "backbone",
 "marionette",
-"models/graphInfo",
+"views/loginView",
 "views/graphView",
-"views/sideBar/sideBarView"
+"views/sideBar/sideBarView",
+"models/budget"
 ],
 
-function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView) {
+function ($, _, Backbone, Marionette, LoginView, GraphView, SideBarView, Budget) {
 
     App = new Marionette.Application();
 
@@ -19,32 +20,30 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView) {
         });
     });
 
+    // global events
+    App.addInitializer(function(options) {
+        App.vent.on('login', function(data) {
+            App.budget = new Budget({
+                data: data
+            });
+
+            this.graphArea.show(new GraphView({ model: App.budget }));
+            this.sideBar.show(new SideBarView({ model: App.budget }));
+        }, this);
+    });
+
     App.addInitializer(function(options) {
         // create application level regions for sidebar and graph
         App.addRegions({
-            sideBar: "section#sideBar",
-            graphArea: "section#graphArea"
+            graphArea: "section#graphArea",
+            sideBar: "section#sideBar"
         });
     });
 
     // gets triggered when app starts
     App.on("start", function() {
         var now = moment().startOf('day');
-
-        // create a graphInfo model and hang it off of App object
-        App.graphInfo = new GraphInfo({
-            start: now,
-            end: now.clone().add('months', 12)
-        });
-
-        // download the budget from the server
-        App.graphInfo.fetch({
-            complete: function() {
-                // show the views in their respective regions with the data we just downloaded
-                App.sideBar.show(new SideBarView({ model: App.graphInfo }));
-                App.graphArea.show(new GraphView({ model: App.graphInfo }));
-            }
-        });
+        this.graphArea.show(new LoginView());
     });
 
     return App;

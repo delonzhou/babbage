@@ -14,7 +14,7 @@ function ($, _, Marionette, Graph, Transaction) {
 		template: 'graph/graph',
 		tagName: "div",
 		className: "graph",
-		
+
 		events: {
 		},
 
