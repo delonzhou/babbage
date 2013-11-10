@@ -289,5 +289,5 @@ function($, F) {
     this.draw();
   }
 
-	return GoogleGraph;
+	return Graph;
 });

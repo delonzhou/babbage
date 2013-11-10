@@ -23,8 +23,11 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, SideBarView, Budget)
     // global events
     App.addInitializer(function(options) {
         App.vent.on('login', function(data) {
+            var now = moment().startOf('day');
             App.budget = new Budget({
-                data: data
+                data: data,
+                start: now,
+                end: now.clone().add('months', 12)
             });
 
             this.graphArea.show(new GraphView({ model: App.budget }));
@@ -42,7 +45,6 @@ function ($, _, Backbone, Marionette, LoginView, GraphView, SideBarView, Budget)
 
     // gets triggered when app starts
     App.on("start", function() {
-        var now = moment().startOf('day');
         this.graphArea.show(new LoginView());
     });
 
