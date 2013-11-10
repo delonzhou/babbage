@@ -1,7 +1,13 @@
 #footerArea {
-    margin: 30px auto;
-    width: $app-width;
+    padding: 30px 0;
     color: white;
+    box-shadow: 0 -1px 10px rgba(0,0,0, 0.3);
+    position: relative;
+    z-index: 100;
+    & > div {
+        width: $app-width;
+        margin: 0 auto;
+    }
 
     h1 {
         font-weight: normal;

@@ -1,12 +1,31 @@
 header#headerArea {
     font-size: 16px;
     color: white;
-    width: $app-width;
-    margin: 20px auto 0;
-    height: 120px;
-
+    box-shadow: 0 -1px 10px rgba(0,0,0, 0.3);
+    position: relative;
+    z-index: 100;
+    & > div {
+        width: $app-width;
+        margin: 0 auto;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 24px;
+        margin: 0;
+        &:before {
+            content: '';
+            @include image(babbage_logo);
+            width: 52px;
+            height: 54px;
+            display: block;
+            background-size: cover;
+            float: left;
+            margin: -5px 20px -45px -5px;
+        }
+    }
     .header-top {
-        padding: 5px 0 10px;
+        padding: 15px 0;
         border-bottom: 1px solid $color-hr;
 
         .logout {
@@ -18,11 +37,13 @@ header#headerArea {
     }
 
     .header-bottom {
-        margin-top: 20px;
+        padding: 20px 0;
     }
 
     .amount {
-        font-size: xx-large;
+        font-size: 62px;
         margin-left: 10px;
+        font-weight: 300;
+        line-height: 72px;
     }
 }

@@ -7459,12 +7459,32 @@ button.close {
 header#headerArea {
   font-size: 16px;
   color: white;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100;
+}
+header#headerArea > div {
   width: 900px;
-  margin: 20px auto 0;
-  height: 120px;
+  margin: 0 auto;
+}
+header#headerArea h1 {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 24px;
+  margin: 0;
+}
+header#headerArea h1:before {
+  content: '';
+  background-image: url(../../images/babbage_logo.png);
+  width: 52px;
+  height: 54px;
+  display: block;
+  background-size: cover;
+  float: left;
+  margin: -5px 20px -45px -5px;
 }
 header#headerArea .header-top {
-  padding: 5px 0 10px;
+  padding: 15px 0;
   border-bottom: 1px solid #796779;
 }
 header#headerArea .header-top .logout {
@@ -7474,11 +7494,13 @@ header#headerArea .header-top .logout:hover {
   color: #796779;
 }
 header#headerArea .header-bottom {
-  margin-top: 20px;
+  padding: 20px 0;
 }
 header#headerArea .amount {
-  font-size: xx-large;
+  font-size: 62px;
   margin-left: 10px;
+  font-weight: 300;
+  line-height: 72px;
 }
 
 .login-view {
@@ -7550,9 +7572,15 @@ header#headerArea .amount {
 }
 
 #footerArea {
-  margin: 30px auto;
-  width: 900px;
+  padding: 30px 0;
   color: white;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100;
+}
+#footerArea > div {
+  width: 900px;
+  margin: 0 auto;
 }
 #footerArea h1 {
   font-weight: normal;
@@ -7593,7 +7621,7 @@ body {
   margin: 0;
   background: #3e0941;
   min-width: 900px;
-  font-family: helvetica, arial, sans-serif;
+  font-family: Roboto, Helvetica, arial, sans-serif;
 }
 body #mainContent {
   overflow-y: hidden;
